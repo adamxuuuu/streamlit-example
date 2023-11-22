@@ -23,10 +23,7 @@ class CV:
         self.source = os.path.join("./app/static", name)
 
     def __str__(self) -> str:
-        return f"""
-        😊 CV: {self.cid}
-        Applyed Job: {self.jname}
-        Metadata: {self.meta}"""
+        return f"CV: {self.cid} \nApplyed Job: {self.jname} Metadata: {self.meta}"
 
 class JD:
     def __init__(self, name: str):
@@ -41,20 +38,9 @@ class JD:
     def __str__(self) -> str:
         return self.jname
 
-def read_pdf(file_path):
-    st.write(file_path)
-    with open(file_path, "rb") as f:
-        pdf = PyPDF2.PdfReader(f)
-        num_pages = pdf.getNumPages()
-        text = ""
-        for page_num in range(num_pages):
-            page = pdf.getPage(page_num)
-            text += page.extractText()
-        return text
-
 def _init():
-    cvs = [CV(cv) for cv in os.listdir("CV")]
-    jds = [JD(jd) for jd in os.listdir("JD")]
+    cvs = [CV(cv) for cv in os.listdir("sample-data/CV")]
+    jds = [JD(jd) for jd in os.listdir("sample-data/JD")]
     for jd in jds:
         for cv in cvs:
             if cv.jid == jd.jid:
